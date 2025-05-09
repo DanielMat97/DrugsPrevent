@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "app",
-    "slug": "app",
+    "name": "PsyPrevenir",
+    "slug": "psyprevenir",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "app",
+    "scheme": "psyprevenir",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -33,10 +33,19 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow PsyPrevenir to access your camera to scan substances."
+        }
       ]
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "openaiApiKey": "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"
     }
   }
 }
