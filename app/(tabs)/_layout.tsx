@@ -1,9 +1,14 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Platform } from 'react-native';
 
 export default function TabLayout() {
+  // Depuración de rutas
+  useEffect(() => {
+    console.log('Tabs layout mounted - scan tab should be visible');
+  }, []);
+
   return (
     <Tabs
       screenOptions={{
