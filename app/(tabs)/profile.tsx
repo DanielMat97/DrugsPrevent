@@ -37,7 +37,7 @@ export default function ProfileScreen() {
     <ScrollView style={styles.container}>
       <View style={styles.profileHeader}>
         <Image
-          source={{ uri: 'https://placehold.co/200x200/6200ee/FFFFFF/png?text=User' }}
+          source={{ uri: 'https://placehold.co/200x200/0032a0/FFFFFF/png?text=User' }}
           style={styles.profileImage}
         />
         <Text style={styles.userName}>{user?.name || 'Usuario'}</Text>
@@ -77,7 +77,7 @@ export default function ProfileScreen() {
               <Switch
                 value={notificationsEnabled}
                 onValueChange={setNotificationsEnabled}
-                color="#6200ee"
+                color="#0032a0"
               />
             )}
           />
@@ -90,7 +90,7 @@ export default function ProfileScreen() {
               <Switch
                 value={biometricEnabled}
                 onValueChange={setBiometricEnabled}
-                color="#6200ee"
+                color="#0032a0"
               />
             )}
           />
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
   profileHeader: {
     alignItems: 'center',
     padding: 20,
-    backgroundColor: '#6200ee',
+    backgroundColor: '#0032a0',
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
   },

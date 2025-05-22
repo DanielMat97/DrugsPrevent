@@ -50,7 +50,7 @@ function RootLayoutNav() {
   if (isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" color="#6200ee" />
+        <ActivityIndicator size="large" color="#0032a0" />
         <Text style={{ marginTop: 10 }}>Cargando...</Text>
       </View>
     );

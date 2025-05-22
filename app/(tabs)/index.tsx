@@ -93,7 +93,7 @@ export default function HomeScreen() {
             mode="contained"
             onPress={loadAlerts}
             disabled={loading}
-            style={{ borderRadius: 20 }}
+            style={{ borderRadius: 20, backgroundColor: '#0032a0' }}
             labelStyle={{ fontSize: 12 }}
           >
             Actualizar
@@ -101,7 +101,7 @@ export default function HomeScreen() {
         </View>
 
         {loading ? (
-          <ActivityIndicator size="large" color="#6200ee" style={styles.loader} />
+          <ActivityIndicator size="large" color="#0032a0" style={styles.loader} />
         ) : alerts.length === 0 ? (
           <Text style={styles.noAlertsText}>No hay alertas disponibles</Text>
         ) : (
@@ -115,8 +115,8 @@ export default function HomeScreen() {
               </Card.Content>
               <Divider />
               <Card.Actions>
-                <Button>Ver detalles</Button>
-                <Button>Compartir</Button>
+                <Button style={{ borderColor: '#0032a0', borderWidth: 1 }}>Ver detalles</Button>
+                <Button style={{ backgroundColor: '#0032a0' }}>Compartir</Button>
               </Card.Actions>
             </Card>
           ))
@@ -132,6 +132,7 @@ export default function HomeScreen() {
         onPress={handleCreateAlert}
         loading={creating}
         disabled={creating}
+        color="#ffffff"
       />
     </View>
   );
@@ -148,7 +149,7 @@ const styles = StyleSheet.create({
   },
   welcomeCard: {
     marginBottom: 20,
-    backgroundColor: '#6200ee',
+    backgroundColor: '#0032a0',
     borderRadius: 10,
   },
   welcomeTitle: {
@@ -195,7 +196,7 @@ const styles = StyleSheet.create({
   alertDate: {
     marginTop: 8,
     fontSize: 12,
-    color: '#888',
+    color: '#0032a0',
     alignSelf: 'flex-end',
   },
   loader: {
@@ -204,7 +205,7 @@ const styles = StyleSheet.create({
   noAlertsText: {
     textAlign: 'center',
     marginTop: 40,
-    color: '#888',
+    color: '#0032a0',
     fontSize: 16,
   },
   bottomSpace: {
@@ -215,6 +216,7 @@ const styles = StyleSheet.create({
     margin: 16,
     right: 0,
     bottom: 0,
-    backgroundColor: '#6200ee',
+    backgroundColor: '#0032a0',
+    color: '#fff',
   },
 });

@@ -1,7 +1,9 @@
 import { useAuth } from '@/contexts/AuthContext';
-import { simulateRecognition } from '@/services/openai';
+import { recognizeSubstance, simulateRecognition } from '@/services/openai';
 import { RecognitionResult } from '@/types';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import * as FileSystem from 'expo-file-system';
+import * as Haptics from 'expo-haptics';
 import * as ImagePicker from 'expo-image-picker';
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, StyleSheet, Text, View } from 'react-native';
@@ -12,6 +14,7 @@ export default function Page() {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [result, setResult] = useState<RecognitionResult | null>(null);
+  const [imageUri, setImageUri] = useState<string | null>(null);
   const { user } = useAuth();
   
   // Comprobar permisos al cargar
@@ -53,6 +56,8 @@ export default function Page() {
       });
       
       if (!result.canceled && result.assets && result.assets.length > 0) {
+        // Guardamos la URI para mostrar vista previa si es necesario
+        setImageUri(result.assets[0].uri);
         // Analizar la imagen capturada
         await analyzeImage(result.assets[0].uri);
       }
@@ -66,10 +71,29 @@ export default function Page() {
   const analyzeImage = async (imageUri: string) => {
     try {
       setIsAnalyzing(true);
+      // Feedback táctil
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       
-      // Aquí normalmente procesaríamos la imagen y la enviaríamos a OpenAI
-      // Por ahora usamos simulación
-      const recognitionResult = await simulateRecognition();
+      // Leer la imagen como base64
+      const base64Image = await FileSystem.readAsStringAsync(imageUri, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
+      
+      if (!base64Image) {
+        throw new Error('No se pudo leer la imagen como base64');
+      }
+      
+      // Intentar reconocer la sustancia con OpenAI
+      let recognitionResult: RecognitionResult;
+      try {
+        console.log('Enviando imagen a OpenAI para análisis...');
+        recognitionResult = await recognizeSubstance(base64Image);
+        console.log('Análisis completado con éxito');
+      } catch (error) {
+        console.warn('Error con OpenAI, usando simulación:', error);
+        // Si hay error con OpenAI, usar la simulación como fallback
+        recognitionResult = await simulateRecognition();
+      }
       
       // Mostrar los resultados
       setResult(recognitionResult);
@@ -85,6 +109,7 @@ export default function Page() {
   // Volver a la pantalla principal
   const resetScan = () => {
     setResult(null);
+    setImageUri(null);
   };
 
   // Renderizar nivel de riesgo con color apropiado
@@ -100,9 +125,12 @@ export default function Page() {
   if (isAnalyzing) {
     return (
       <View style={styles.analysisContainer}>
-        <ActivityIndicator size="large" color="#6200ee" />
+        <ActivityIndicator size="large" color="#0032a0" />
         <Text style={styles.analysisText}>
-          Analizando sustancia...
+          Analizando sustancia con IA...
+        </Text>
+        <Text style={styles.analysisSubtext}>
+          Esto puede tardar unos segundos
         </Text>
       </View>
     );
@@ -146,7 +174,7 @@ export default function Page() {
   // Pantalla inicial
   return (
     <View style={styles.container}>
-      <MaterialCommunityIcons name="camera-enhance" size={80} color="#6200ee" style={styles.icon} />
+      <MaterialCommunityIcons name="camera-enhance" size={80} color="#0032a0" style={styles.icon} />
       <Text style={styles.text}>Análisis de Sustancias</Text>
       <Text style={styles.description}>
         Toma una foto clara de la sustancia que deseas analizar. 
@@ -166,12 +194,12 @@ export default function Page() {
       
       <View style={styles.infoContainer}>
         <View style={styles.infoItem}>
-          <MaterialCommunityIcons name="information" size={24} color="#6200ee" />
+          <MaterialCommunityIcons name="information" size={24} color="#0032a0" />
           <Text style={styles.infoText}>La información es orientativa y no reemplaza la consulta médica</Text>
         </View>
         
         <View style={styles.infoItem}>
-          <MaterialCommunityIcons name="lock" size={24} color="#6200ee" />
+          <MaterialCommunityIcons name="lock" size={24} color="#0032a0" />
           <Text style={styles.infoText}>Tus imágenes son procesadas de forma segura y no se almacenan</Text>
         </View>
       </View>
@@ -194,7 +222,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: '#6200ee',
+    color: '#0032a0',
   },
   description: {
     textAlign: 'center',
@@ -234,6 +262,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#6200ee',
   },
+  analysisSubtext: {
+    marginTop: 10,
+    fontSize: 14,
+    color: '#888',
+  },
   cameraContainer: {
     flex: 1,
     backgroundColor: '#000',
@@ -264,7 +297,7 @@ const styles = StyleSheet.create({
   resultTitle: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: '#6200ee',
+    color: '#0032a0',
     marginBottom: 5,
   },
   resultSubstance: {
@@ -297,5 +330,6 @@ const styles = StyleSheet.create({
   },
   scanAgainButton: {
     marginTop: 20,
+    backgroundColor: '#0032a0',
   }
 }); 

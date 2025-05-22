@@ -66,7 +66,7 @@ export default function LoginScreen() {
     <View style={styles.container}>
       <View style={styles.logoContainer}>
         <Image 
-          source={{ uri: 'https://placehold.co/200x200/6200ee/FFFFFF/png?text=PsyPrevenir' }} 
+          source={{ uri: 'https://placehold.co/200x200/0032a0/FFFFFF/png?text=PsyPrevenir' }} 
           style={styles.logo} 
         />
       </View>
@@ -113,7 +113,7 @@ export default function LoginScreen() {
           style={styles.button}
           contentStyle={styles.buttonContent}
         >
-          {loading ? <ActivityIndicator color="#ffffff" /> : 'Iniciar Sesión'}
+          {loading ? <ActivityIndicator color="#0032a0" /> : 'Iniciar Sesión'}
         </Button>
         
         <View style={styles.registerContainer}>
@@ -130,7 +130,7 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#0032a0',
     padding: 20,
   },
   logoContainer: {
@@ -142,12 +142,13 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     borderRadius: 60,
+    backgroundColor: "#0032a0"
   },
   formContainer: {
     backgroundColor: 'white',
     borderRadius: 10,
     padding: 20,
-    shadowColor: '#000',
+    shadowColor: '#0032a0',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
@@ -157,7 +158,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: 'bold',
     marginBottom: 5,
-    color: '#6200ee',
+    color: '#0032a0',
   },
   subtitle: {
     fontSize: 16,
@@ -169,7 +170,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 20,
-    backgroundColor: '#6200ee',
+    backgroundColor: '#0032a0',
   },
   buttonContent: {
     height: 50,
@@ -181,7 +182,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   registerText: {
-    color: '#6200ee',
+    color: '#0032a0',
     fontWeight: 'bold',
   },
   errorText: {

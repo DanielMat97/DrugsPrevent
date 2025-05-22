@@ -7,7 +7,7 @@ export default function AuthLayout() {
     <View style={styles.container}>
       <Stack screenOptions={{
         headerStyle: {
-          backgroundColor: '#6200ee',
+          backgroundColor: '#0032a0',
         },
         headerTintColor: '#ffffff',
         headerTitleStyle: {
@@ -24,6 +24,6 @@ export default function AuthLayout() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#0032a0',
   },
 }); 

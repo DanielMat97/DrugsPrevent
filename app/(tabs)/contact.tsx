@@ -92,7 +92,7 @@ export default function ContactScreen() {
 
       {loading ? (
         <View style={styles.loaderContainer}>
-          <ActivityIndicator size="large" color="#6200ee" />
+          <ActivityIndicator size="large" color="#0032a0" />
           <Text style={styles.loadingText}>Cargando contactos...</Text>
         </View>
       ) : (
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
   },
   header: {
-    backgroundColor: '#6200ee',
+    backgroundColor: '#0032a0',
     padding: 20,
     paddingTop: 15,
     paddingBottom: 25,
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 4,
   },
   callButton: {
-    backgroundColor: '#6200ee',
+    backgroundColor: '#0032a0',
   },
   loaderContainer: {
     flex: 1,

@@ -166,7 +166,7 @@ export default function RegisterScreen() {
           style={styles.button}
           contentStyle={styles.buttonContent}
         >
-          {loading ? <ActivityIndicator color="#ffffff" /> : 'Registrarse'}
+          {loading ? <ActivityIndicator color="#0032a0" /> : 'Registrarse'}
         </Button>
         
         <View style={styles.loginContainer}>
@@ -183,7 +183,7 @@ export default function RegisterScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#0032a0',
   },
   contentContainer: {
     padding: 20,
@@ -203,11 +203,11 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: 'bold',
     marginBottom: 5,
-    color: '#6200ee',
+    color: '#0032a0',
   },
   subtitle: {
     fontSize: 16,
-    color: '#666',
+    color: '#0032a0',
     marginBottom: 20,
   },
   input: {
@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 20,
-    backgroundColor: '#6200ee',
+    backgroundColor: '#0032a0',
   },
   buttonContent: {
     height: 50,
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   loginText: {
-    color: '#6200ee',
+    color: '#0032a0',
     fontWeight: 'bold',
   },
   errorText: {
